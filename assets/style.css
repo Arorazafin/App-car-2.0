@@ -1,0 +1,39 @@
+
+.active{
+    color: #ef0000 !important;
+}
+
+
+body {
+    background-color: #f9f9f9;
+    color: #2c3459;
+    font-size: 15px;
+    margin: 0px;
+} 
+
+.Select-menu-outer {
+    font-size: 10px;
+}
+
+.card {
+    /*text-align: center;*/
+    /* border: 50px; */
+    /* padding: 6px */
+}
+.card .card-title {
+    text-align: center;
+    padding: 2px
+}
+
+.card .card-body {
+    padding: 2px
+}
+
+.has-value.Select--single>.Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single>.Select-control .Select-value .Select-value-label {
+    color: grey;
+}
+
+#idDropdownAgences.VirtualizedSelectFocusedOption {
+    background-color: #F08080;
+    color: white;
+  }

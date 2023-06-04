@@ -1,0 +1,70 @@
+version : '3.7'
+
+services:
+    app_web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: car-app_web
+        volumes:
+            - .:/project
+        depends_on:
+            - database_web
+        networks:
+            - app_network
+        
+        ##1)server flask
+        command: tail -f /dev/null  # avoid exited code 0 - the conteneur always run for dev
+        #command: python index.py
+        ports:
+            - "5000:5000"
+        environment: 
+            - PORT= 5000
+            #- FLASK_DEBUG= 1
+        
+        ##2)server waitress
+        #command: waitress-serve index:server
+        #ports:
+        #    - "8080:8080"
+            
+        ##3)server gunicorn
+        #command: gunicorn app:server
+
+    database_web:
+        image: postgres
+        container_name: car-app_db
+        restart: always
+        environment:
+            - POSTGRES_PASSWORD=aro
+            - POSTGRES_DB=dbCAR
+        volumes:  # Ensure the duplicability of the database on the host folder (especially when dump)
+            - ./data_sql/dbCAR2022-full.sql:/docker-entrypoint-initdb.d/dbCAR2022-full.sql
+            - ./data_sql/:/docker-entrypoint-initdb.d/
+        networks:
+            - app_network
+
+    adminer:
+        image: adminer
+        #image: dockette/adminer:full-php5
+        restart: always
+        container_name: car-db_adminer
+        depends_on: 
+            - database_web
+        ports:
+            - 8080:8080
+        networks:
+            - app_network
+
+
+networks:      
+    app_network:
+        name: car-app_net
+        driver: bridge
+
+
+# docker exec -it car-app_web bash
+# docker-compose exec app_web bash
+
+# SELECT * FROM "etat_quittance" WHERE "Réf Encaissement" = 'ESP.'
+
+# ALTER TABLE orass RENAME COLUMN "Code Souscripteur" TO "Code souscripteur";

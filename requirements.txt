@@ -1,0 +1,35 @@
+#dash
+#dash==1.21.0
+dash-bootstrap-components==0.13.1
+dash-auth==1.4.1
+
+dash
+#dash-bootstrap-components
+#dash-auth
+
+
+#standard tools
+pandas
+
+#DB & postegres
+psycopg2-binary
+SQLAlchemy
+
+#server
+gunicorn
+
+#env
+python-dotenv
+
+
+
+#This is caused by dash and fixed in the new 2.3.1 release. So simply do:
+#pip install -U dash
+#If that doesn't help, you have to downgrade werkzeug manually, e.g.,
+#pip install werkzeug==2.0.3
+
+
+#pip uninstall werkzeug
+#pip install -v https://github.com/pallets/werkzeug/archive/refs/tags/2.0.1.tar.gz
+#pip install -v https://github.com/pallets/werkzeug/archive/refs/tags/2.2.2.tar.gz
+
